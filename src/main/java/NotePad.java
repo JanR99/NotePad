@@ -8,7 +8,7 @@ public class NotePad extends JFrame {
     JScrollPane scrollPane;
     JMenuBar menuBar;
     JMenu fileMenu;
-    JMenuItem newMenuItem, openMenuItem, saveMenuItem, saveAsMenuItem, exitMenuItem;
+    JMenuItem newMenuItem, openMenuItem, saveAsMenuItem, exitMenuItem;
 
     public static void main(String[] args) {
         new NotePad();
@@ -27,7 +27,6 @@ public class NotePad extends JFrame {
         fileMenu = new JMenu("File");
         newMenuItem = new JMenuItem("New");
         openMenuItem = new JMenuItem("Open");
-        saveMenuItem = new JMenuItem("Save");
         saveAsMenuItem = new JMenuItem("Save As...");
         exitMenuItem = new JMenuItem("Exit");
 
@@ -46,24 +45,6 @@ public class NotePad extends JFrame {
                         line = reader.readLine();
                     }
                     reader.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        saveMenuItem.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileFilter(new FileNameExtensionFilter("Text files", "txt"));
-            int result = fileChooser.showSaveDialog(this);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
-                if (!file.getName().endsWith(".txt")) {
-                    file = new File(file.getAbsolutePath() + ".txt");
-                }
-                try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-                    writer.write(textArea.getText());
-                    writer.close();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -91,7 +72,6 @@ public class NotePad extends JFrame {
 
         fileMenu.add(newMenuItem);
         fileMenu.add(openMenuItem);
-        fileMenu.add(saveMenuItem);
         fileMenu.add(saveAsMenuItem);
         fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
