@@ -32,7 +32,6 @@ public class NotePad extends JFrame {
 
         newMenuItem.addActionListener(e -> textArea.setText(""));
         openMenuItem.addActionListener(e -> {
-            textArea.setText("");
             JFileChooser fileChooser = new JFileChooser();
             int result = fileChooser.showOpenDialog(NotePad.this);
             if (result == JFileChooser.APPROVE_OPTION) {
@@ -44,6 +43,7 @@ public class NotePad extends JFrame {
                         textArea.append(line + "\n");
                         line = reader.readLine();
                     }
+                    textArea.setText("");
                     reader.close();
                 } catch (IOException ex) {
                     ex.printStackTrace();
